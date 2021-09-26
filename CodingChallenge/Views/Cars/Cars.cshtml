@@ -1,0 +1,64 @@
+@model CodingChallenge.Models.CarViewModel
+
+@{
+    ViewData["Title"] = "Cars";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Cars</h1>
+
+@using(Html.BeginForm("Cars", "Cars", FormMethod.Post, new {id="Cars", enctype ="multipart/form-data"}))
+{
+    @if (Model != null && Model.AllCars != null)
+    {
+        <div class="row form-group">
+            <div class ="col-sm-2 col-sm-41">
+                <lebel style="line-height: 30px;">Availble Cars</lebel>
+            </div>
+            <div class ="col-sm-2 col-sm-41">
+                @if (Model != null && Model.AllCars != null)
+                {
+                    @Html.DropDownListFor(m=>m.Id, new SelectList(Model.AllCars, "Id", "Brand", Model.AllCars))
+                }
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class ="col-sm-2 col-sm-21">
+                <lebel style="line-height: 30px;">&nbsp;</lebel>
+            </div>
+            <div class ="col-sm-2 col-sm-21">
+                <button id ="btnCarDetails" type="submit" class="btn btn-primary linkButtons">Redirect to Details</button>
+            </div>
+            <div class ="col-sm-2 col-sm-21">
+               <button id ="btnCarDetailsPartial" type="button" class="btn btn-primary linkButtons" onclick="LoadCarDetails()">Load Partial</button>
+            </div>
+        </div>
+    <hr />
+    <br />
+    <div id = "container">
+        @if (Model != null && Model.Brand != null)
+        {
+            @Html.Partial("PartialViewCarDetails");
+        }
+    </div>
+
+    }
+    else    {
+        <div style="padding-left: 500px;"><label><strong>No Cars Availble</strong></label></div>
+    }
+}
+
+<script type="text/javascript">
+function LoadCarDetails(){
+    var myData = $('#Cars').serialize();
+    $.ajax({
+        url:'/Cars/CarDetails',
+        type:"GET",
+        data:myData,
+        contentType: 'application/json;charset=uft-8',
+        success:function(result){
+            $('#container').html(result);
+        }
+    });
+}
+</script>

@@ -1,0 +1,33 @@
+@model CodingChallenge.Models.CarViewModel
+
+<div class="col-sm-9">
+    <H4>Car Details</H4>
+    <div class="row form-group">
+            <div class ="col-sm-2 col-sm-41">
+                @Html.LabelFor(m=> m.Brand)
+            </div>
+            <div  style="width: auto;">
+                @Html.DisplayFor(model=> model.Brand)
+            </div>
+    </div>
+    <div class="row form-group">
+            <div class ="col-sm-2 col-sm-41">
+                @Html.LabelFor(m=> m.Fuel)
+            </div>
+            <div class ="col-sm-2 col-sm-41">
+                @Html.DisplayFor(model=> model.Fuel)
+            </div>
+    </div>
+
+    <div class="row form-group">
+            <div  style="width: auto;">
+                @if (Model != null && Model.Models != null)
+                {
+                   @foreach (var item in Model.Models)
+                   {
+                      <div style="width: auto;">Model No : @item</div>
+                   }
+                }
+            </div>
+    </div>
+</div>

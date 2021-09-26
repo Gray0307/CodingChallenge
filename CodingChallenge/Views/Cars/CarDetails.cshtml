@@ -1,0 +1,39 @@
+@model CodingChallenge.Models.CarViewModel
+@{
+    ViewData["Title"] = "CarDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Car Details</h1>
+
+<div class="col-sm-9">
+    <H4>Car Details</H4>
+    <div class="row form-group">
+            <div class ="col-sm-2 col-sm-41">
+                @Html.LabelFor(m=> m.Brand)
+            </div>
+            <div class ="col-sm-2 col-sm-41">
+                @Html.DisplayFor(model=> model.Brand)
+            </div>
+    </div>
+    <div class="row form-group">
+            <div class ="col-sm-2 col-sm-41">
+                @Html.LabelFor(m=> m.Fuel)
+            </div>
+            <div class ="col-sm-2 col-sm-41">
+                @Html.DisplayFor(model=> model.Fuel)
+            </div>
+    </div>
+
+    <div class="row form-group">
+            <div class ="col-sm-2 col-sm-41">
+                @if (Model != null && Model.Models != null)
+                {
+                   @foreach (var item in Model.Models)
+                   {
+                      <div>Model No : @item</div>
+                   }
+                }
+            </div>
+    </div>
+</div>
